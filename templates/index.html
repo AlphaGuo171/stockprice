@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>股票成本分析</title>
+    <!-- 引入 Plotly.js -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+
+<body>
+    <h1>股票成本分析</h1>
+    <!-- 显示错误信息 -->
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul class="flashes">
+        {% for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+
+    <!-- 显示错误 -->
+    {% if error %}
+    <div class="error">{{ error }}</div>
+    {% endif %}
+
+    <!-- 表单输入 -->
+    <form method="post">
+        <label for="stock_code">股票代码：</label>
+        <input type="text" id="stock_code" name="stock_code" required>
+        <input type="submit" value="提交">
+    </form>
+
+    <!-- 显示图表 -->
+    {% if plot_div %}
+    <h2>{{ stock_code }}成本数据与持股成本对比</h2>
+    {{ plot_div|safe }}
+    {% endif %}
+</body>
+
+</html>
